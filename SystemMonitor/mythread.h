@@ -9,7 +9,7 @@
                         //Hay que almacenar el par etiqueta-valor.
 #include <QString>      //Pares de tipo QString.
 #include <QFileInfoList>
-#include <QFile>
+#include <QFileInfo>
 #include <QDebug>
 
 class MyThread : public QThread
@@ -18,12 +18,12 @@ class MyThread : public QThread
 
 public:
     MyThread(int tiempo, QObject *parent = nullptr); //Varía en el tiempo.
-    ~MyThread();
+    //~MyThread();
 
     int mySize();
 
-    void push(QPair<QString,Qstring> pair);
-    QPair<QString,Qstring> pop();
+    void push(QPair<QString,QString> pair);
+    QPair<QString,QString> pop();
 
 signals:
     void dataSend();

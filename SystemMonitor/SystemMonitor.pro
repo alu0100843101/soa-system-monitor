@@ -31,3 +31,5 @@ HEADERS  += mainwindow.h \
     mythread.h
 
 FORMS    += mainwindow.ui
+
+QMAKE_CXXFLAGS += -std=gnu++11

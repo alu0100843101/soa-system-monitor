@@ -15,14 +15,14 @@ void MyThread::push(QPair <QString, QString> pair)
 {
 //Qt Documentation: http://doc.qt.io/qt-4.8/qmutexlocker.html
     QMutexLocker locker(&mutex_);
-    queue.enqueue(pair);
+    queue_.enqueue(pair);
     emit dataSend();
 }
 
 QPair<QString,QString> MyThread::pop()
 {
    QMutexLocker locker(&mutex_);
-   return queue.dequeue();
+   return queue_.dequeue();
 }
 
 void MyThread::run()
