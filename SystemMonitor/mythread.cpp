@@ -35,6 +35,7 @@ void MyThread::run()
 
     dir_.setPath("/sys/class/hwmon");           //Directorio donde están los ficheros con la info de los sensores.
     dir_.setNameFilters(QStringList()<<"hwmon*"
+                        //<<"uevent*"             //A parte de los archivos que nos exigen están los "uevent" que también tiene  información de sensores en linux.
                         <<"temp*"<<"name");     //Los archivos que buscamos son temp* y fan*
                                                 //Este puede estar en carpetas hwmon*
 

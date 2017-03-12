@@ -5,6 +5,9 @@
 #include <QTableWidgetItem>
 
 #include <QString>
+#include <sys/types.h>      //Información de una cuenta de usuario a través de su nombre o id.
+#include <pwd.h>            //Información de una cuenta de usuario a través de su nombre o id.
+#include <QVector>          //Almacenar proceso en una estructura cola o vector.
 
 #include "mythread.h"
 
@@ -30,8 +33,8 @@ private:
 
     MyThread *mythread_;
 
-    QTableWidgetItem *ent_;
-    QString textEnt_;
+    QTableWidgetItem *entradaSensor_;
+    QString textSensor_;
     int line_ = 0;
 
 };

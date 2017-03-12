@@ -27,8 +27,8 @@ void MainWindow::dataReceive()
     QPair<QString,QString> pair;
     pair = mythread_->pop();
 
-    if(textEnt_!=""){
-        if(pair.second!=textEnt_)
+    if(textSensor_!=""){
+        if(pair.second!=textSensor_)
         {
             if(ui->tableWidget_4->item(line_,0)==NULL)
             {
@@ -63,8 +63,8 @@ void MainWindow::dataReceive()
         ui->tableWidget_4->setItem(line_,0,new QTableWidgetItem(pair.first));
         ui->tableWidget_4->setItem(line_,1,new QTableWidgetItem(pair.second));
 
-        ent_ = ui->tableWidget_4->item(0,1);
-        textEnt_ = ent_->text();
+        entradaSensor_ = ui->tableWidget_4->item(0,1);
+        textSensor_ = entradaSensor_->text();
 
         line_++;
     }
