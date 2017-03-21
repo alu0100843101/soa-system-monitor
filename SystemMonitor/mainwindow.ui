@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="procesos">
      <attribute name="title">
@@ -52,7 +52,13 @@
      </attribute>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
-       <widget class="QTableWidget" name="tableWidget_3"/>
+       <widget class="QTreeWidget" name="treeWidget">
+        <column>
+         <property name="text">
+          <string notr="true">1</string>
+         </property>
+        </column>
+       </widget>
       </item>
      </layout>
     </widget>

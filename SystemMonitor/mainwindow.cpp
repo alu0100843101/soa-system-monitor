@@ -26,6 +26,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(time_,SIGNAL(timeout()), this,
             SLOT(myTimeout()));                 //Se conectan las señales de timeout.
     time_->start(5000);                         //milisegundos -> 5000 mS = 5 segundos.
+
+    hardProc_.moveToThread(&hardThread_);
+    connect(&hardProc_, SIGNAL(hardwareRequest()), this, SLOT(hardwareProcess()));
+    hardProc_.hardProcess();
 }
 
 MainWindow::~MainWindow()
@@ -228,4 +232,42 @@ void MainWindow::myTimeout()
         dir_.cd("..");
     }
 
+}
+
+
+void MainWindow::hardwareProcess()
+{
+    jdoc_ = QJsonDocument::fromJson(hardProc_.hardwareAsync());
+
+    ui->treeWidget->setColumnCount(1);
+    ui->treeWidget->setHeaderLabels(QStringList() << "NOMBRE");
+
+    addTreeRoot(jdoc_.object().value("id").toString(), jdoc_);
+}
+
+/********************** PRIVATE: **********************/
+
+void MainWindow::addTreeRoot(QString name, QJsonDocument jdoc)
+{
+        QTreeWidgetItem *treeItem = new QTreeWidgetItem(ui->treeWidget);
+
+        treeItem->setText(0, name);
+        QJsonArray v = jdoc.object().value("children").toArray();
+
+        for (int i=0; i<=v.size();i++)
+            addTreeChild(treeItem, v[i].toObject().value("id").toString(),v[i].toObject());
+}
+
+void MainWindow::addTreeChild(QTreeWidgetItem *parent, QString name, QJsonObject obj)
+{
+        QTreeWidgetItem *treeItem = new QTreeWidgetItem();
+
+        treeItem->setText(0, name);
+        QJsonArray v= obj.value("children").toArray();
+
+        if(!v.isEmpty())
+            for (int i=0; i<=v.size();i++)
+                addTreeChild(treeItem, v[i].toObject().value("id").toString(),v[i].toObject());
+
+        parent->addChild(treeItem);
 }

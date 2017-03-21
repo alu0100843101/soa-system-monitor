@@ -14,7 +14,13 @@
 #include <QFuture>          //QtConcurrent devuelve tipo QFuture.
 #include <QTimer>           //Emite señales de temporizador cada intervalo de tiempo.
 
+#include<QJsonDocument>
+#include<QTreeWidget>
+#include<QJsonObject>
+#include<QJsonValue>
+
 #include "mythread.h"
+#include "hardware.h"
 
 struct Process
 {
@@ -48,16 +54,19 @@ private slots:
     void dataReceive();
     void myTimeout();               //Señal timeout() [clase QTimer].
     //void handleFinished();
+    void hardwareProcess();
 
 private:
     Ui::MainWindow *ui;
 
+    /* Parte 1: Sensores */
     MyThread *mythread_;
 
     QTableWidgetItem *entradaSensor_;
     QString textSensor_;
     int lineSensor_ = 0;
 
+    /* Parte 2: Procesos */
     QVector <Process> procesos_;
 
     QTableWidgetItem *entradaProcesos_;
@@ -67,6 +76,14 @@ private:
     QTimer *time_;
 
     passwd *psswd;
+
+    /* Parte 3: Hardware */
+    QThread hardThread_;
+    Hardware hardProc_;
+    QJsonDocument jdoc_;
+
+    void addTreeRoot(QString name, QJsonDocument jdoc);
+    void addTreeChild(QTreeWidgetItem *parent, QString name, QJsonObject obj);
 };
 
 #endif // MAINWINDOW_H
