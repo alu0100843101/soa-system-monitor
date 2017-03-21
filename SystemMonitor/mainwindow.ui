@@ -91,17 +91,8 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actionArchivo"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <action name="actionArchivo">
-   <property name="text">
-    <string>Archivo</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+A</string>
-   </property>
-  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
